@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kúrpites</title>
     <link rel="stylesheet" href="/src/output.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+    
 </head>
-<body class="flex flex-col items-center bg-black">    
+<body class="flex flex-col items-center bg-black text-white">    
     
 <!--hero mobile-->
 <section id="hero-home" class="flex flex-col lg:flex-row justify-center items-center w-full p-4 lg:px-40 2xl:px-90 gap-6 bg-cover md:bg-full h-screen" style="background-image: url(assets/bgImage.png) ;">
 
-<div class="flex flex-row justify-start w-full max-w-[1800px] lg:justify-start">
-    <div id="hero-content" class="flex flex-col items-start justify-start gap-2 p-4 bg-white/20 rounded-xl backdrop-blur-2xl shadow-2xl lg:p-8  max-w-[500px] ">
+<div class="flex flex-row justify-start w-full max-w-[1800px] lg:justify-start 2xl:justify-start">
+    <div id="hero-content" class="flex flex-col items-start justify-start gap-2 p-6 bg-white/20 rounded-xl backdrop-blur-2xl shadow-2xl lg:p-8  max-w-[500px] ">
         <h1 class="text-[24px] lg:text-[40px] font-semibold text-white">Creamos tu sitio web. <br> Movemos tu marca. <br>Vendemos contigo.</h1>
         <p class="text-[16px] lg:text-2xl font-light text-white">Webs sin plantillas. Meta Ads bien ejecutadas para un crecimiento real.</p>
         <div id="call-to-actions" class="flex flex-col lg:flex-row gap-4 w-full mt-6">
@@ -22,14 +25,39 @@
                     Servicios
                     <i class="ri-arrow-right-line"></i>
                 </button>
-    
         </div>
      </div>
-
 </div>
 
-
 </section>
-    
+   <!--value proposal--> 
+<section class="flex flex-col p-4 lg:p-0 lg:py-8 justify-center w-full lg:px-40 2xl:px-90 gap-6 bg-cover md:bg-full h-auto max-w-[1800px]">
+    <div id="proposal-header" class="flex flex-col justify-start gap-2 ">
+        <h2 class="text-2xl font-semibold w-full">¿Por qué elegir a Kúrpites para tu proyecto?</h2>
+        <p>Nos enfocamos en crear experiencias digitales 
+            eficientes, escalables y diseñadas para convertir.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 mt-6">
+       
+        <div class="flex flex-col items-center gap-4 w-full">
+            <i class="ri-presentation-line text-4xl"></i>
+            <h3 class="text-xl font-semibold">Amplio recorrido</h3>
+            <p>Contamos con más de <span class="font-semibold text-2xl">6 años</span> de experiencia trabajando en UX/UI y Marketing.</p>            
+        </div>
+        <div class="flex flex-col items-center gap-4 w-full">
+            <i class="ri-layout-line text-4xl"></i>
+            <h3 class="text-xl font-semibold">Expertos UI</h3>
+            <p>Más de <span class="font-semibold text-2xl">27,000 pantallas</span> diseñadas nos respaldan en la creación de interfaces funcionales.</p>            
+        </div>
+        <div class="flex flex-col items-center gap-4 w-full">
+            <i class="ri-megaphone-line text-4xl"></i>
+            <h3 class="text-xl font-semibold">Publicidad efectiva</h3>
+            <p>Hemos maximizado hasta un <span class="font-semibold text-2xl">900% </span> la retribución en ventas por campañas de Meta.</p>            
+        </div>
+        
+
+    </div>
+</section>
 </body>
 </html>
