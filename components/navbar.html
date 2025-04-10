@@ -1,0 +1,30 @@
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center w-screen p-8 lg:px-20 2xl:px-90 bg-black text-white transition-transform duration-300 ease-in-out
+shadow-lg shadow-white/10 lg:shadow-none lg:bg-transparent lg:backdrop-blur-2xl lg:shadow-none">
+
+    <!-- Logo -->
+    <div id="logo" class="flex flex-row items-center gap-2">
+        <img src="assets/logo_w.png" alt="Kúrpites Logo" class="object-cover min-w-24 lg:min-w-30  ">
+    </div>
+
+    <!-- Hamburguesa Mobile -->
+    <button id="menu-toggle" class="lg:hidden text-3xl">
+        <i id="menu-icon" class="ri-menu-line"></i>
+    </button>
+
+    <!-- Menu Navegación -->
+    <ul id="menu" class="hidden flex-col items-center justify-center text-center gap-4 absolute top-full left-0 w-full bg-black p-4 transition-all duration-300 ease-in-out lg:flex lg:flex-row lg:static lg:gap-20">
+
+        <li><a href="#services" class="text-xl hover:text-brand-primary">Inicio</a></li>
+        <li><a href="#portfolio" class="text-xl hover:text-brand-primary">¿Por qué nosotros?</a></li>
+        <li><a href="#contact" class="text-xl hover:text-brand-primary">Servicios</a></li>
+    </ul>
+    
+
+    <!-- Botón WhatsApp Desktop -->
+    <a href="whatsapp" class="hidden lg:block">
+        <button id="whatsapp-button" class="flex justify-center items-center h-[44px] bg-brand-primary text-white rounded-2xl text-lg p-4 gap-2">
+            <i class="ri-whatsapp-line text-2xl"></i>
+            WhatsApp
+        </button>
+    </a>
+</nav>
