@@ -1,5 +1,7 @@
 /**
  * Carga un componente HTML externo de forma asíncrona
+ * @param {string} path - Ruta del archivo HTML
+ * @param {string} targetId - ID del contenedor donde insertar
  */
 const loadComponent = async (path, targetId) => {
     try {
@@ -13,7 +15,7 @@ const loadComponent = async (path, targetId) => {
         initNavbarScroll();
       }
     } catch (error) {
-      console.error(`Error cargando componente ${path}:`, error);
+      console.error(`❌ Error cargando componente ${path}:`, error);
     }
   };
   
@@ -26,15 +28,11 @@ const loadComponent = async (path, targetId) => {
       const menuIcon = document.getElementById('menu-icon');
       const menu = document.getElementById('menu');
   
-      if (!menuToggle || !menuIcon || !menu) {
-        throw new Error('Elementos de navbar no encontrados.');
-      }
+      if (!menuToggle || !menuIcon || !menu) throw new Error('Elementos de navbar no encontrados.');
   
-      menuToggle.addEventListener('click', () => {
-        toggleMenu(menu, menuIcon);
-      });
+      menuToggle.addEventListener('click', () => toggleMenu(menu, menuIcon));
     } catch (error) {
-      console.error('Error inicializando navbar:', error);
+      console.error('❌ Error inicializando navbar:', error);
     }
   };
   
@@ -66,36 +64,38 @@ const loadComponent = async (path, targetId) => {
   };
   
   /**
- * Cotizador IA – Llama a Tēchpa con los datos del formulario
- */
-export async function cotizarConIA() {
-    const nombreProyecto = document.getElementById("proyecto").value.trim();
-    const tipo = document.getElementById("tipo").value;
-    const web = document.getElementById("web").value;
-    const campañas = document.getElementById("campañas").value;
-    const objetivo = document.getElementById("objetivo").value.trim();
-    const tiempo = document.getElementById("tiempo").value;
-    const presupuesto = document.getElementById("presupuesto").value;
+   * Cotizador IA – Llama a Tēchpa con los datos del formulario
+   */
+  export async function cotizarConIA() {
     const salida = document.getElementById("respuestaIA");
-  
     salida.classList.remove("hidden");
     salida.innerHTML = `<span class="animate-pulse text-brand-primary">🔍 Tēchpa está analizando tu proyecto...</span>`;
   
-    if (!tipo || !web || !objetivo) {
+    const campos = {
+      nombreProyecto: document.getElementById("proyecto").value.trim(),
+      tipo: document.getElementById("tipo").value,
+      web: document.getElementById("web").value,
+      campañas: document.getElementById("campañas").value,
+      objetivo: document.getElementById("objetivo").value.trim(),
+      tiempo: document.getElementById("tiempo").value,
+      presupuesto: document.getElementById("presupuesto").value
+    };
+  
+    if (!campos.tipo || !campos.web || !campos.objetivo) {
       salida.innerText = "⚠️ Por favor completa los campos obligatorios: tipo de negocio, sitio web y objetivo.";
       return;
     }
   
     const prompt = `
-  Soy Tēchpa, asesor IA de Kurpites. Tengo un nuevo cliente potencial.
+  Soy Tēchpa, asesor IA de Kurpites. Tengo un nuevo cliente potencial:
   
-  📁 Proyecto: ${nombreProyecto || "No especificado"}
-  🏢 Tipo de negocio: ${tipo}
-  🖥️ Sitio web: ${web}
-  📣 Campañas Meta Ads: ${campañas}
-  🎯 Objetivo: ${objetivo}
-  ⏱️ Tiempo requerido: ${tiempo}
-  💵 Presupuesto: ${presupuesto || "No definido"}
+  📁 Proyecto: ${campos.nombreProyecto || "No especificado"}
+  🏢 Tipo de negocio: ${campos.tipo}
+  🖥️ Sitio web: ${campos.web}
+  📣 Campañas Meta Ads: ${campos.campañas}
+  🎯 Objetivo: ${campos.objetivo}
+  ⏱️ Tiempo requerido: ${campos.tiempo}
+  💵 Presupuesto: ${campos.presupuesto || "No definido"}
   
   Con base en esta información, recomiéndale:
   - El paquete Kurpites más adecuado (Class B, A o S)
@@ -111,11 +111,9 @@ export async function cotizarConIA() {
         body: JSON.stringify({ prompt })
       });
   
-      // Verifica si el servidor respondió con JSON válido
-      const contentType = respuesta.headers.get("content-type");
-      const isJson = contentType && contentType.includes("application/json");
-  
-      const data = isJson ? await respuesta.json() : await respuesta.text();
+      const contentType = respuesta.headers.get("content-type") || "";
+      const esJSON = contentType.includes("application/json");
+      const data = esJSON ? await respuesta.json() : await respuesta.text();
   
       if (!respuesta.ok) {
         console.error("❌ Error del servidor:", data);
@@ -126,14 +124,12 @@ export async function cotizarConIA() {
       const mensaje = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
       salida.innerText = mensaje;
   
-      // Botón dinámico WhatsApp
       const whatsappBtn = document.createElement("a");
       whatsappBtn.href = `https://wa.me/523317188930?text=${encodeURIComponent("Hola, revisé mi cotización en Kurpites y me interesa:\n\n" + mensaje)}`;
       whatsappBtn.target = "_blank";
       whatsappBtn.rel = "noopener noreferrer";
       whatsappBtn.className = "block mt-6 text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition w-full lg:w-auto";
       whatsappBtn.innerText = "📲 Enviar esta propuesta por WhatsApp";
-  
       salida.appendChild(whatsappBtn);
   
     } catch (error) {
@@ -141,4 +137,30 @@ export async function cotizarConIA() {
       console.error("❌ Error de red o parseo:", error);
     }
   }
+  
+  /**
+   * Scroll suave para navegación por anclas
+   */
+  const enableSmoothScroll = () => {
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  };
+  
+  /**
+   * Inicialización global
+   */
+  (async () => {
+    await loadComponent('./components/navbar.html', 'navbar');
+    enableSmoothScroll();
+  
+    const btn = document.getElementById("btnCotizar");
+    if (btn) {
+      btn.addEventListener("click", cotizarConIA);
+    }
+  })();
   
