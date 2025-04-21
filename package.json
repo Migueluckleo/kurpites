@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Migueluckleo/kurpites#readme",
   "dependencies": {
+    "@microsoft/clarity": "^1.0.0",
     "@tailwindcss/cli": "^4.0.14",
     "remixicon": "^4.6.0",
     "tailwindcss": "^4.0.14"
