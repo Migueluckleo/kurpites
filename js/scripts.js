@@ -7,12 +7,14 @@ const loadComponent = async (path, targetId) => {
     try {
       const response = await fetch(path);
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+  
       const html = await response.text();
       document.getElementById(targetId).innerHTML = html;
   
       if (path.includes('navbar.html')) {
         await initNavbarEvents();
         initNavbarScroll();
+        enableSmoothScroll();
       }
     } catch (error) {
       console.error(`❌ Error cargando componente ${path}:`, error);
@@ -22,7 +24,7 @@ const loadComponent = async (path, targetId) => {
   /**
    * Inicializa eventos del menú navbar
    */
-  const initNavbarEvents = async () => {
+  const initNavbarEvents = () => {
     try {
       const menuToggle = document.getElementById('menu-toggle');
       const menuIcon = document.getElementById('menu-icon');
@@ -63,8 +65,6 @@ const loadComponent = async (path, targetId) => {
     });
   };
   
-  
-  
   /**
    * Scroll suave para navegación por anclas
    */
@@ -79,15 +79,9 @@ const loadComponent = async (path, targetId) => {
   };
   
   /**
-   * Inicialización global
+   * Inicialización global al cargar el DOM
    */
-  (async () => {
-    await loadComponent('./components/navbar.html', 'navbar');
-    enableSmoothScroll();
-  
-    const btn = document.getElementById("btnCotizar");
-    if (btn) {
-      btn.addEventListener("click", cotizarConIA);
-    }
-  })();
+  document.addEventListener('DOMContentLoaded', async () => {
+    await loadComponent('/components/navbar.html', 'navbar');
+  });
   
