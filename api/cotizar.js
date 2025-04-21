@@ -15,11 +15,12 @@ export default async function handler(req, res) {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+
         },
         body: JSON.stringify({
           model: "gpt-4",
           messages: [
-            { role: "system", content: "Eres un asesor de proyectos web profesional y empático llamado Tēchpa." },
+            { role: "system", content: "Eres un asesor de proyectos web profesional y empático." },
             { role: "user", content: prompt }
           ],
           temperature: 0.7,
