@@ -63,4 +63,31 @@ const loadComponent = async (path, targetId) => {
     });
   };
   
- 
+  
+  
+  /**
+   * Scroll suave para navegación por anclas
+   */
+  const enableSmoothScroll = () => {
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  };
+  
+  /**
+   * Inicialización global
+   */
+  (async () => {
+    await loadComponent('./components/navbar.html', 'navbar');
+    enableSmoothScroll();
+  
+    const btn = document.getElementById("btnCotizar");
+    if (btn) {
+      btn.addEventListener("click", cotizarConIA);
+    }
+  })();
+  
