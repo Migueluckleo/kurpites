@@ -1,3 +1,6 @@
+console.log("Enviando prompt a OpenAI:", prompt);
+console.log("Usando API Key:", apiKey ? "✅ definida" : "❌ NO DEFINIDA");
+
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
       return res.status(405).json({ error: 'Método no permitido' });
@@ -46,4 +49,4 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Error inesperado", detalle: error.message });
     }
   }
-  
+  º
