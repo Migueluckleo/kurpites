@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "api/cotizar.js": {
+        "runtime": "nodejs18.x"
+      }
+    }
+  }
+  
