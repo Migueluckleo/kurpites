@@ -84,3 +84,63 @@ const initNavbarScroll = () => {
 
 // Ejecutar carga del navbar al iniciar
 await loadComponent('./components/navbar.html', 'navbar');
+
+// JS opcional si quieres hacer tracking o efectos extra
+document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  export async function cotizarConIA() {
+    const nombreProyecto = document.getElementById("proyecto").value.trim();
+    const tipo = document.getElementById("tipo").value;
+    const web = document.getElementById("web").value;
+    const campañas = document.getElementById("campañas").value;
+    const objetivo = document.getElementById("objetivo").value.trim();
+    const tiempo = document.getElementById("tiempo").value;
+    const presupuesto = document.getElementById("presupuesto").value;
+  
+    const salida = document.getElementById("respuestaIA");
+    salida.classList.remove("hidden");
+    salida.innerText = "🔍 Tēchpa está analizando tu proyecto...";
+  
+    // Construir prompt personalizado
+    const prompt = `
+  Soy Tēchpa, asesor IA de Kurpites. Tengo un nuevo cliente potencial.
+  
+  📁 Proyecto: ${nombreProyecto || "No especificado"}
+  🏢 Tipo de negocio: ${tipo}
+  🖥️ Sitio web: ${web}
+  📣 Campañas Meta Ads: ${campañas}
+  🎯 Objetivo: ${objetivo}
+  ⏱️ Tiempo requerido: ${tiempo}
+  💵 Presupuesto: ${presupuesto || "No definido"}
+  
+  Con base en esta información, recomiéndale:
+  - El paquete Kurpites más adecuado (Class B, A o S)
+  - El tiempo estimado de entrega
+  - El rango de precio sugerido
+  - Un mensaje claro, directo y empático
+  `;
+  
+    try {
+      const respuesta = await fetch("/api/cotizar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt })
+      });
+  
+      const data = await respuesta.json();
+      salida.innerText = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
+    } catch (error) {
+      salida.innerText = "❌ Hubo un problema al conectarse con Tēchpa. Intenta más tarde.";
+      console.error("Error al llamar a la IA:", error);
+    }
+  }
