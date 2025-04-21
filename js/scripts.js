@@ -1,101 +1,73 @@
 /**
- * Función para cargar un componente HTML externo de forma asíncrona
- * @param {string} path - Ruta del archivo HTML a cargar
- * @param {string} targetId - ID del contenedor donde se insertará el componente
+ * Carga un componente HTML externo de forma asíncrona
  */
 const loadComponent = async (path, targetId) => {
     try {
-        const response = await fetch(path);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const html = await response.text();
-        document.getElementById(targetId).innerHTML = html;
-
-        // Ejecutar lógica específica si es el navbar
-        if (path.includes('navbar.html')) {
-            await initNavbarEvents();
-            initNavbarScroll();
-        }
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const html = await response.text();
+      document.getElementById(targetId).innerHTML = html;
+  
+      if (path.includes('navbar.html')) {
+        await initNavbarEvents();
+        initNavbarScroll();
+      }
     } catch (error) {
-        console.error(`Error cargando componente ${path}:`, error);
+      console.error(`Error cargando componente ${path}:`, error);
     }
-};
-
-/**
- * Inicializa los eventos de la Navbar una vez cargado el HTML
- */
-const initNavbarEvents = async () => {
+  };
+  
+  /**
+   * Inicializa eventos del menú navbar
+   */
+  const initNavbarEvents = async () => {
     try {
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuIcon = document.getElementById('menu-icon');
-        const menu = document.getElementById('menu');
-
-        if (!menuToggle || !menuIcon || !menu) {
-            throw new Error('No se encontraron los elementos de la navbar.');
-        }
-
-        menuToggle.addEventListener('click', async () => {
-            await toggleMenu(menu, menuIcon);
-        });
-
+      const menuToggle = document.getElementById('menu-toggle');
+      const menuIcon = document.getElementById('menu-icon');
+      const menu = document.getElementById('menu');
+  
+      if (!menuToggle || !menuIcon || !menu) {
+        throw new Error('Elementos de navbar no encontrados.');
+      }
+  
+      menuToggle.addEventListener('click', () => {
+        toggleMenu(menu, menuIcon);
+      });
     } catch (error) {
-        console.error('Error inicializando eventos de la navbar:', error);
+      console.error('Error inicializando navbar:', error);
     }
-};
-
-/**
- * Alterna la visibilidad del menú y el ícono hamburguesa/cerrar
- * @param {HTMLElement} menu 
- * @param {HTMLElement} menuIcon 
- */
-const toggleMenu = async (menu, menuIcon) => {
+  };
+  
+  /**
+   * Alterna visibilidad del menú móvil
+   */
+  const toggleMenu = (menu, menuIcon) => {
     menu.classList.toggle('hidden');
-
-    if (menu.classList.contains('hidden')) {
-        menuIcon.classList.remove('ri-close-line');
-        menuIcon.classList.add('ri-menu-line');
-    } else {
-        menuIcon.classList.remove('ri-menu-line');
-        menuIcon.classList.add('ri-close-line');
-    }
-};
-
-/**
- * Lógica para mostrar/ocultar la navbar al hacer scroll
- */
-const initNavbarScroll = () => {
+    menuIcon.classList.toggle('ri-menu-line');
+    menuIcon.classList.toggle('ri-close-line');
+  };
+  
+  /**
+   * Oculta o muestra la navbar al hacer scroll
+   */
+  const initNavbarScroll = () => {
     const navbar = document.querySelector('nav');
     let lastScrollTop = 0;
-
+  
     window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop) {
-            // Scroll hacia abajo - Oculta Navbar
-            navbar.classList.add('-translate-y-full');
-        } else {
-            // Scroll hacia arriba - Muestra Navbar
-            navbar.classList.remove('-translate-y-full');
-        }
-
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-};
-
-// Ejecutar carga del navbar al iniciar
-await loadComponent('./components/navbar.html', 'navbar');
-
-// JS opcional si quieres hacer tracking o efectos extra
-document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        navbar.classList.add('-translate-y-full');
+      } else {
+        navbar.classList.remove('-translate-y-full');
       }
+      lastScrollTop = Math.max(0, scrollTop);
     });
-  });
-
+  };
+  
+  /**
+   * Cotizador IA – Llama a Tēchpa con los datos del formulario
+   */
   export async function cotizarConIA() {
     const nombreProyecto = document.getElementById("proyecto").value.trim();
     const tipo = document.getElementById("tipo").value;
@@ -104,12 +76,17 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     const objetivo = document.getElementById("objetivo").value.trim();
     const tiempo = document.getElementById("tiempo").value;
     const presupuesto = document.getElementById("presupuesto").value;
-  
     const salida = document.getElementById("respuestaIA");
-    salida.classList.remove("hidden");
-    salida.innerText = "🔍 Tēchpa está analizando tu proyecto...";
   
-    // Construir prompt personalizado
+    salida.classList.remove("hidden");
+    salida.innerHTML = `<span class="animate-pulse text-brand-primary">🔍 Tēchpa está analizando tu proyecto...</span>`;
+  
+    // Validación mínima
+    if (!tipo || !web || !objetivo) {
+      salida.innerText = "⚠️ Por favor completa los campos obligatorios: tipo de negocio, sitio web y objetivo.";
+      return;
+    }
+  
     const prompt = `
   Soy Tēchpa, asesor IA de Kurpites. Tengo un nuevo cliente potencial.
   
@@ -131,16 +108,53 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     try {
       const respuesta = await fetch("/api/cotizar", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt })
       });
   
       const data = await respuesta.json();
-      salida.innerText = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
+      const mensaje = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
+  
+      salida.innerText = mensaje;
+  
+      // Botón dinámico WhatsApp
+      const whatsappBtn = document.createElement("a");
+      whatsappBtn.href = `https://wa.me/523317188930?text=${encodeURIComponent("Hola, revisé mi cotización en Kurpites y me interesa:\n\n" + mensaje)}`;
+      whatsappBtn.target = "_blank";
+      whatsappBtn.rel = "noopener noreferrer";
+      whatsappBtn.className = "block mt-6 text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl transition w-full lg:w-auto";
+      whatsappBtn.innerText = "📲 Enviar esta propuesta por WhatsApp";
+  
+      salida.appendChild(whatsappBtn);
+  
     } catch (error) {
-      salida.innerText = "❌ Hubo un problema al conectarse con Tēchpa. Intenta más tarde.";
+      salida.innerText = "❌ Hubo un problema al contactar con Tēchpa. Intenta de nuevo más tarde.";
       console.error("Error al llamar a la IA:", error);
     }
   }
+  
+  /**
+   * Scroll suave para navegación por anclas
+   */
+  const enableSmoothScroll = () => {
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  };
+  
+  // Inicialización global al cargar la página
+  (async () => {
+    await loadComponent('./components/navbar.html', 'navbar');
+    enableSmoothScroll();
+  
+    // Enlace moderno del botón
+    const btn = document.getElementById("btnCotizar");
+    if (btn) {
+      btn.addEventListener("click", cotizarConIA);
+    }
+  })();
+  
