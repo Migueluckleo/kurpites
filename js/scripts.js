@@ -66,9 +66,9 @@ const loadComponent = async (path, targetId) => {
   };
   
   /**
-   * Cotizador IA – Llama a Tēchpa con los datos del formulario
-   */
-  export async function cotizarConIA() {
+ * Cotizador IA – Llama a Tēchpa con los datos del formulario
+ */
+export async function cotizarConIA() {
     const nombreProyecto = document.getElementById("proyecto").value.trim();
     const tipo = document.getElementById("tipo").value;
     const web = document.getElementById("web").value;
@@ -81,7 +81,6 @@ const loadComponent = async (path, targetId) => {
     salida.classList.remove("hidden");
     salida.innerHTML = `<span class="animate-pulse text-brand-primary">🔍 Tēchpa está analizando tu proyecto...</span>`;
   
-    // Validación mínima
     if (!tipo || !web || !objetivo) {
       salida.innerText = "⚠️ Por favor completa los campos obligatorios: tipo de negocio, sitio web y objetivo.";
       return;
@@ -112,9 +111,19 @@ const loadComponent = async (path, targetId) => {
         body: JSON.stringify({ prompt })
       });
   
-      const data = await respuesta.json();
-      const mensaje = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
+      // Verifica si el servidor respondió con JSON válido
+      const contentType = respuesta.headers.get("content-type");
+      const isJson = contentType && contentType.includes("application/json");
   
+      const data = isJson ? await respuesta.json() : await respuesta.text();
+  
+      if (!respuesta.ok) {
+        console.error("❌ Error del servidor:", data);
+        salida.innerText = "❌ Tēchpa encontró un problema. Intenta más tarde.";
+        return;
+      }
+  
+      const mensaje = data.respuesta || "⚠️ Tēchpa no pudo generar una respuesta clara.";
       salida.innerText = mensaje;
   
       // Botón dinámico WhatsApp
@@ -129,32 +138,7 @@ const loadComponent = async (path, targetId) => {
   
     } catch (error) {
       salida.innerText = "❌ Hubo un problema al contactar con Tēchpa. Intenta de nuevo más tarde.";
-      console.error("Error al llamar a la IA:", error);
+      console.error("❌ Error de red o parseo:", error);
     }
   }
-  
-  /**
-   * Scroll suave para navegación por anclas
-   */
-  const enableSmoothScroll = () => {
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  };
-  
-  // Inicialización global al cargar la página
-  (async () => {
-    await loadComponent('./components/navbar.html', 'navbar');
-    enableSmoothScroll();
-  
-    // Enlace moderno del botón
-    const btn = document.getElementById("btnCotizar");
-    if (btn) {
-      btn.addEventListener("click", cotizarConIA);
-    }
-  })();
   
