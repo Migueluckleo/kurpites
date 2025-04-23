@@ -30,6 +30,7 @@
     --font-weight-light: 300;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
+    --font-weight-bold: 700;
     --leading-tight: 1.25;
     --leading-snug: 1.375;
     --radius-lg: 0.5rem;
@@ -516,6 +517,9 @@
   .h-\[36px\] {
     height: 36px;
   }
+  .h-\[40px\] {
+    height: 40px;
+  }
   .h-\[44px\] {
     height: 44px;
   }
@@ -587,6 +591,9 @@
   }
   .w-20 {
     width: calc(var(--spacing) * 20);
+  }
+  .w-30 {
+    width: calc(var(--spacing) * 30);
   }
   .w-\[108px\] {
     width: 108px;
@@ -1024,6 +1031,13 @@
   }
   .gap-10 {
     gap: calc(var(--spacing) * 10);
+  }
+  .space-y-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
   }
   .space-y-reverse {
     :where(& > :not(:last-child)) {
@@ -1618,6 +1632,10 @@
     --tw-leading: var(--leading-tight);
     line-height: var(--leading-tight);
   }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
   .font-extralight {
     --tw-font-weight: var(--font-weight-extralight);
     font-weight: var(--font-weight-extralight);
@@ -1712,6 +1730,9 @@
   }
   .text-\[white\] {
     color: white;
+  }
+  .text-black {
+    color: var(--color-black);
   }
   .text-gray-800 {
     color: var(--color-gray-800);
@@ -2177,6 +2198,13 @@
   .transform-view {
     transform-box: view-box;
   }
+  .hover\:cursor-pointer {
+    &:hover {
+      @media (hover: hover) {
+        cursor: pointer;
+      }
+    }
+  }
   .hover\:bg-brand-primary\/80 {
     &:hover {
       @media (hover: hover) {
@@ -2196,6 +2224,16 @@
       @media (hover: hover) {
         color: var(--color-brand-primary);
       }
+    }
+  }
+  .md\:flex {
+    @media (width >= 48rem) {
+      display: flex;
+    }
+  }
+  .md\:hidden {
+    @media (width >= 48rem) {
+      display: none;
     }
   }
   .md\:w-50 {
