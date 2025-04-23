@@ -74,56 +74,119 @@
 </head>
 <body class="flex flex-col items-center bg-black text-white px-2">    
     <div id="navbar"></div>
-<!--hero-->
-<section id="hero-home" class="flex flex-col lg:flex-row justify-center items-center w-full p-4 lg:px-20 2xl:px-90 gap-6 bg-cover md:bg-full h-screen" style="background-image: url(assets/bgImage.png) ;">
+<section id="promotion" class="flex flex-col lg:flex-col w-full p-4 max-w-[1800px] lg:px-30 h-auto lg:mt-24">
+    <div class="flex flex-col lg:flex-col-reverse w-full gap-4">
+        <img src="assets/promoimage.png" alt="image-promotional" class="w-full h-full lg:h-[540px] object-cover mt-30 lg:mt-0">
+        <div class="flex flex-col lg:flex-row items-center ">
+            <div class="flex flex-col justify-start w-full lg:w-3/4 max-w-[1800px] mt-4">
+                <p id="expiration" class="text-[12px]">Válido del 23 de abril al 31 de abril</p>
+                <h2 class="text-3xl">Single Landing Page</h2>
+                <p id="description" class="text-[16px]">¡Llega a más personas esta misma semana! <br><br>Obtén una 
+                página web con SEO optimizado lista para ser encontrada en google</p>
+            </div>
+            <div class="flex flex-col lg:w-1/4 w-full justify-center mt-6 lg:mt-0">
+                <div class="flex flex-row w-full lg:1/4 justify-center lg:justify-end gap-1">
+                    <h2 class="text-3xl font-semibold">
+                        $499 USD
+                    </h2>
+                    <p>+iva</p>
+                </div>
+                <button class="flex justify-center items-center bg-brand-primary w-full h-[44px] rounded-lg text-[16px] p-4 gap-2 hover:bg-brand-primary/90 mt-6">
+                    ¡Me interesa!
+                </button>
 
-<div class="flex flex-row justify-start w-full max-w-[2400px] lg:justify-start 2xl:justify-start">
-    <div id="hero-content" class="flex flex-col items-start justify-start gap-2 p-6 bg-white/20 rounded-xl backdrop-blur-2xl shadow-2xl lg:p-8  max-w-[500px] ">
-        <h1 class="text-[24px] lg:text-[40px] font-semibold text-white">Creamos tu sitio web. <br> Movemos tu marca. <br>Vendemos contigo.</h1>
-        <p class="text-[16px] lg:text-lg font-light text-white">Webs sin plantillas. Meta Ads bien ejecutadas para un crecimiento real.</p>
-        <div id="call-to-actions" class="flex flex-col lg:flex-row gap-4 w-full mt-6">
-         
+            </div>
+        </div>
+        
+    </div>
+</section>
+<section class="flex flex-col justify-center items-start w-full p-4 lg:px-30  gap-6 mt-10">
+    <h1 class="text-3xl lg:text-4xl">Somos una boutique de diseño estratégico de alto nivel</h1>
+    <h3 class="text-lg lg:text-2xl">Nos especializamos en:</h3>
+    <div class="flex flex-wrap gap-4">
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Desarrollo de páginas web</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Fotografía profesional</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Vídeo profesional</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Meta Ads</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Branding y Diseño</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Diseño de interfaces y aplicaciones B2B B2C</p>
+        </div>
+        <div class="flex flex-row px-4 bg-[#1e1e1e] rounded-full p-4 gap-4 h-[36px] items-center">
+            <p>Diseño de experiencia de usuario</p>
+        </div>
+        
+    </div>
+</section>
+
+<!--hero
+<section id="hero-home" class="flex flex-col lg:flex-row justify-center items-center w-full p-4 lg:px-30  gap-6 bg-cover md:bg-full h-screen" style="background-image: url(assets/bgImage.png) ;">
+    
+    <div class="flex flex-row justify-start w-full max-w-[2400px] lg:justify-start 2xl:justify-start">
+        <div id="hero-content" class="flex flex-col items-start justify-start gap-2 p-6 bg-white/20 rounded-xl backdrop-blur-2xl shadow-2xl lg:p-8  max-w-[500px] ">
+            <h1 class="text-[24px] lg:text-[40px] font-semibold text-white">Creamos tu sitio web. <br> Movemos tu marca. <br>Vendemos contigo.</h1>
+            <p class="text-[16px] lg:text-lg font-light text-white">Webs sin plantillas. Meta Ads bien ejecutadas para un crecimiento real.</p>
+            <div id="call-to-actions" class="flex flex-col lg:flex-row gap-4 w-full mt-6">
+                
                 <button id="services-button" class="flex flex-row justify-center items-center h-[44px] w-full  bg-brand-primary text-[white] rounded-2xl text-xl p-4 gap-2  hover:bg-brand-primary/80"> 
-                   <a href="#services">Servicios</a>
+                    <a href="#services">Servicios</a>
                     <i class="ri-arrow-right-line"></i>
                 </button>
+            </div>
         </div>
-     </div>
-</div>
-
-</section>
-   <!--value proposal--> 
-<section class="flex flex-col p-4 lg:p-0 lg:py-8 justify-center w-full lg:px-20 2xl:px-90 gap-6 bg-cover md:bg-full h-auto max-w-[2400px]">
+    </div>
+    
+</section>-->
+<!--value proposal--> 
+<section class="flex flex-col p-4 lg:p-0 lg:py-8 justify-center w-full lg:px-30  gap-6 bg-cover md:bg-full h-auto max-w-[2400px] mt-10">
     <div id="proposal-header" class="flex flex-col justify-start gap-2 ">
         <h2 class="text-2xl lg:text-4xl font-semibold w-full">¿Por qué elegir a Kúrpites para tu proyecto?</h2>
         <p>Nos enfocamos en crear experiencias digitales 
             eficientes, escalables y diseñadas para convertir.</p>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8 mt-6">
-       
-        <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
-            <i class="ri-presentation-line text-4xl"></i>
-            <h3 class="text-xl font-semibold">Amplio recorrido</h3>
-            <p>Contamos con más de <span class="font-semibold text-2xl lg:text-4xl">6 años</span> de experiencia trabajando en UX/UI y Marketing.</p>            
         </div>
-        <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
-            <i class="ri-layout-line text-4xl"></i>
-            <h3 class="text-xl font-semibold">Expertos UI</h3>
-            <p>Más de <span class="font-semibold text-2xl lg:text-4xl">27,000 pantallas</span> diseñadas nos respaldan en la creación de interfaces funcionales.</p>            
+        
+        <div class="flex flex-col lg:flex-row gap-8 mt-6">
+            
+            <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
+                <i class="ri-presentation-line text-4xl"></i>
+                <h3 class="text-xl font-semibold">Amplio recorrido</h3>
+                <p>Contamos con más de <span class="font-semibold text-2xl lg:text-2xl">6 años</span> de experiencia trabajando en UX/UI y Marketing.</p>            
+            </div>
+            <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
+                <i class="ri-layout-line text-4xl"></i>
+                <h3 class="text-xl font-semibold">Expertos UI</h3>
+                <p>Más de <span class="font-semibold text-2xl lg:text-2xl">27,000 pantallas</span> diseñadas nos respaldan en la creación de interfaces funcionales.</p>            
+            </div>
+            <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
+                <i class="ri-megaphone-line text-4xl"></i>
+                <h3 class="text-xl font-semibold">Publicidad efectiva</h3>
+                <p>Hemos maximizado hasta un <span class="font-semibold text-2xl lg:text-2xl">900% </span> la retribución en ventas por campañas de Meta.</p>            
+            </div>
         </div>
-        <div class="flex flex-col items-center gap-4 w-full bg-[#1e1e1e] p-6 rounded-2xl">
-            <i class="ri-megaphone-line text-4xl"></i>
-            <h3 class="text-xl font-semibold">Publicidad efectiva</h3>
-            <p>Hemos maximizado hasta un <span class="font-semibold text-2xl lg:text-4xl">900% </span> la retribución en ventas por campañas de Meta.</p>            
+    </section>
+    <section class="flex flex-col gap-6 lg:px-30 w-full p-4 max-w-[1800px] mt-10 ">
+        <div class="flex flex-col justify-start w-full  p-4 h-auto rounded-lg py-10" style="background-image: url(assets/section-bg.png); background-size: cover; background-position: center;">
+            <div class="w-full text-center mt-10">
+                <p id="typingText" class="text-lg md:text-4xl font-medium  h-24"></p>
+              </div>
         </div>
-    </div>
-</section>
+    
+    </section>
 
    <!--Paquetes--> 
-   <section id="services" class="flex flex-col  p-4 lg:p-0 lg:py-8 justify-center w-full lg:px-20 2xl:px-90 gap-6 bg-cover md:bg-full h-auto max-w-[2400px] mt-10" style="background-image: url(assets/bgImage.png)">
+   <section id="services" class="flex flex-col  p-4 lg:p-0 lg:py-8 justify-center w-full lg:px-30  gap-6 bg-cover md:bg-full h-auto max-w-[2400px] mt-10">
     <div id="services-header" class="flex flex-col justify-start gap-2 ">
-        <h2 class="text-2xl lg:text-4xl font-semibold w-full">Conoce nuestros servicios</h2>
+        <h2 class="text-2xl lg:text-4xl font-semibold w-full">Conoce nuestros más vendidos</h2>
         <p>Proyectos a la medida para cumplir con tus necesidades y las de tus clientes.</p>
     </div>
 
@@ -312,22 +375,26 @@
 
 
 <!--clientes-->
-<section id="clients-carousel" class="flex flex-col lg:flex-row w-full justify-center items-start p-4 lg:p-0 lg:py-8 gap-6 bg-cover md:bg-full h-auto max-w-[2400px]  ">
+<section id="clients-carousel" class="flex flex-col lg:flex-row w-full justify-center items-start p-4 lg:p-20 lg:py-8 gap-6 bg-cover md:bg-full h-auto max-w-[1800px]  ">
     
-    <div class="w-full lg:w-1/2 flex flex-col justify-start gap-2">
+    <div class="flex flex-col items-center justify-center gap-2">
         <h2 class="text-2xl lg:text-4xl font-semibold w-ful lg:text-center">Clientes</h2>
-        <div id="logos-container" class="flex flex-row gap-6">
+        <div id="logos-container" class="flex flex-wrap gap-6 max-w-[1800px] lg:max-w-[2400px] justify-center lg:justify-center lg:gap-6">
          <img class="flex w-20 md:w-50 object-contain" src="assets/consultoriablancologo.png" alt="">   
          <img class="flex w-20 md:w-50 object-contain" src="assets/logisticalogoblanco.png" alt="">
         <img class="flex w-20  md:w-50 object-contain" src="assets/mokitalogoblanco.png" alt="">
+        <img class="flex w-20 md:w-50 object-contain" src="assets/kokos 1.png" alt="">
+        <img class="flex w-20  md:w-50 object-contain" src="assets/simpostor.png" alt="">
+        <img class="flex w-20  md:w-50 object-contain" src="assets/stransición.png" alt="">
+        <img class="flex w-20  md:w-50 object-contain" src="assets/tenku 1.png" alt="">
         </div>
     </div>
 </section>
 
 
-<footer class="flex flex-col lg:flex-row w-full justify-center items-start p-4 lg:p-0 lg:py-8 gap-6 bg-cover md:bg-full h-auto max-w-[2400px] border-t-1 border-gray-50 mt-10">
-    <div class="flex flex-col lg:flex-row lg:justify-between gap-6 w-full justify-start p-4 lg:px-20 2xl:px-90">
-        <div>
+<footer class="flex flex-col lg:flex-row w-full justify-between items-start p-4 lg:p-0 lg:py-8 gap-6 bg-cover md:bg-full h-auto max-w-[2400px] border-t-1 border-gray-50 mt-10">
+    <div class="flex flex-col lg:flex-row lg:justify-between gap-6 w-full justify-start p-4 lg:px-30 ">
+        <div class="flex flex-col items-start justify-start gap-2 lg:w-1/3">
             <h3 class="text-2xl w-full">Contáctanos</h2>
                 <ul>
                     <li class="text-[16px]">56 1275 8324</li>
@@ -338,14 +405,18 @@
 
         </div>
 
-        <div id="social-media"> 
+        <div id="social-media" class="flex flex-col items-start justify-start gap-2 lg:w-1/3"> 
             <h3 class="text-2xl">Redes sociales</h3>
             <div class="flex flex-row gap-4 mt-6">
-                <i class="ri-instagram-fill text-3xl lg:text-6xl"></i>
-                <i class="ri-facebook-fill text-3xl lg:text-6xl"></i>
-                <i class="ri-linkedin-fill text-3xl lg:text-6xl"></i>
+                <i class="ri-instagram-fill text-3xl lg:text-4xl"></i>
+                <i class="ri-facebook-fill text-3xl lg:text-4xl"></i>
+                <i class="ri-linkedin-fill text-3xl lg:text-4xl"></i>
             </div>
         </div>
+    </div>
+
+    <div id="logo" class="flex flex-col items-center justify-center gap-2 mt-6 lg:mt-0 lg:w-1/3">
+        <img src="assets/logo_w.png" alt="" class="w-[200px]">
     </div>
 </footer>
 
